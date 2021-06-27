@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Jogo da Velha | Partida Única</title>
+        <link href="estilo_novo.css" rel="stylesheet">
+    </head>
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
+        <div id="logoarea">
+            <img id="logo" src="logo.JPG">
+        </div>
+        <div id="corpo2">
+            <img id="backg" src="explore.jpg">
+            <div id="configuracoes">
+                <div id="intracorpo3">
+                    <div id="conteudo">
+                            <table>
+                                <tr>
+                                    <th colspan="2">
+                                        Configurações da Partida
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Número de Rodadas:
+                                    </td>
+                                    <td>
+                                        <select name="inNumRod">
+                                            <option value="" selected>Selecione o Nº de rodadas</option>
+                                            <option value="1">1</option>
+                                            <option value="3">3</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" id="botao">
+                                        <input type="button" name="confirmar" class="botoes" id="confirmar" value="CONFIRMAR" onclick="verificarNum()">
+                                    </td>
+                                </tr>
+                            </table>
+                        <p id="msg">Por favor, selecione o número de rodadas</p>
+                    </div>
+                </div>
+            </div>
+            <div id="partida">
+                <div id="info">
+                    <div id="titulo">
+                        <h1>Partida Única</h1>
+                        <h3>Jogador1 x Jogador2</h3>
+                    </div>
+                    <h2>Status do Jogo</h2>
+
+                    <div id="rodadas">
+                    </div>
+
+                    <h3>Resultado: </h3><h3 id="resultado"></h3>
+                    <input type="hidden" name="enviar" id="proxima_rodada" class="botoes" value="PRÓXIMA RODADA" onclick="iniciarRodada()">
+                    <input type="hidden" name="enviar" id="finalizar_partida" class="botoes" value="FINALIZAR PARTIDA" onclick="finalizarPartida()">
+                    <input type="hidden" name="enviar" id="jogar_novamente" class="botoes" value="JOGAR NOVAMENTE" onclick="jogarNovamente()">
+                    <input type="hidden" name="enviar" id="nova_partida" class="botoes" value="NOVA PARTIDA" onclick="novaPartida()">
+                </div>
+                <div id="intracorpo">
+                            <div class="janela">
+                            </div>
+                </div>
+        </div>
+        </div>
+        <div id="rodape3">
+            <p>Copyright by Webmaster - matheussimoesdasilva@protonmail.com</p>
+            <div id="grupoicone">
+                <a href="https://gab.com/MatheusSilva148"><img class="icones" src="gab.png"></a>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $("#celular").mask("(00) 00000-0000");
+        </script>
+        <script src="main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,288 @@
+#msg {
+    text-align: center;
+    visibility: hidden;
+}
+
+#logoarea {
+    position: absolute;
+    background-color: #f54f4f;
+    width: 100%;
+    height: 10%;
+    top:0px;
+    left:0px;
+    margin:0px 0px 0px 0px;
+}
+
+#logo {
+    width: 16%;
+    height: 60%;
+    position: absolute;
+    top: 20%;
+    left: 1.5%;
+    
+}
+
+#barra {
+    position: absolute;
+    background-color: #fdd639;
+    width: 100%;
+    height: 5%;
+    top: 22%;
+    left:0px;
+    margin:0px 0px 0px 0px;   
+    font-family: Futura Lt Bt;
+}
+
+#backg {
+    width: 100%;
+    height: 100%;
+}
+
+#corpo2 {
+    position: absolute; 
+    width: 100%;
+    height: 81%;
+    top: 10%;
+    left:0px;   
+    font-family: Futura Lt Bt;
+    color: #665f55;
+}
+
+#intracorpo {
+    position: absolute;
+    background-color: #fbfaf8;
+    width: 40%;
+    height: 80%;
+    top: 10%;
+    left: 30%; 
+    font-family: Futura Lt Bt;
+    color: #665f55;
+    border-radius: 5%;
+}
+
+#intracorpo3 {
+    position: absolute;
+    background-color: #fbfaf8;
+    width: 35%;
+    height: 40%;
+    top: 30%;
+    left: 33%; 
+    font-family: Futura Lt Bt;
+    color: #665f55;
+    border-radius: 5%;
+}
+
+
+#partida {
+    visibility: hidden;
+}
+
+#rodape3 {
+    position: absolute;
+    background-color: #f54f4f;
+    width: 100%;
+    height: 9%;
+    top: 91%;
+    left:0px;
+    margin:0px 0px 0px 0px;
+    font-family: Futura Lt Bt;
+    color: white;
+}
+
+.icones {
+    width: 100%;
+    height: 100%;
+}
+
+#proxima_rodada {
+    position: absolute;
+    left: 21%;
+    top: 81%;
+    width: 55%;
+    height: 10%;
+}
+
+#confirmar {
+    width: 30%;
+    height: 80%;
+}
+
+#finalizar_partida {
+    position: absolute;
+    left: 21%;
+    top: 81%;
+    width: 55%;
+    height: 10%;
+}
+
+#jogar_novamente {
+    position: absolute;
+    left: 45%;
+    top: 81%;
+    width: 50%;
+    height: 10%;
+    font-size: 70%;
+}
+
+#nova_partida {
+    position: absolute;
+    left: 5%;
+    top: 81%;
+    width: 35%;
+    height: 10%;
+    font-size: 70%;
+}
+
+.botoes {
+    background-color: white;
+    border: 1px solid #f54f4f;
+    color: #f54f4f;
+    font-weight: bold;
+}
+
+.botoes:hover {
+    background-color: #f54f4f;
+    border: #f54f4f;
+    color: white;
+    font-weight: bold;
+}
+
+input, select {
+    background-color: #fee7e7;
+    border: 1px solid #fee7e7;
+    border-radius: 10px;
+    color: #f54f4f;
+    resize: none;
+    outline: none;
+}
+
+input:hover {
+    background-color: #f99f9f;
+    border: 1px solid #f54f4f;
+    color: #f54f4f;
+}
+
+select:hover {
+    background-color: #fee7e7;
+    border: 1px solid #f54f4f;
+    color: #f54f4f;
+}
+
+#rodape3 p {
+    position:absolute;
+    left: 34%;
+    top: 35%;
+    font-size: 1.2vw;
+}
+
+td {
+    text-align: right;
+}
+
+select {
+    width: 208px;
+    height:28px;
+}
+
+#botao {
+    text-align: center;
+}
+
+#grupoicone {
+    position: absolute;
+    right: 2%;
+    top: 25%;
+    width: 2.4%;
+    height: 50%;
+    display: inline;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.janela {
+    border-top: 1px solid grey;
+    border-left: 1px solid grey;
+    height: 75%;
+    width: 60%;
+    font-size: 0;
+    position: absolute;
+    top: 12.5%;
+    left: 20%;
+}
+
+.tile {
+    width: 33.3%;
+    height: 33.3%;
+    border-bottom: 1px solid grey;
+    border-right: 1px solid rgb(172, 149, 149);
+    display: inline-block;
+}
+
+.tile img{
+    height: 100%;
+    width: 100%;
+}
+
+img {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#info {
+    position: absolute;
+    height: 80%;
+    width: 20%;
+    background-color: #fbfaf8;
+    left: 5%;
+    top: 10%;
+    border-radius: 5%;
+    padding-top: 1.5%;
+    padding-left: 1.5%;
+    line-height: 320%;
+}
+
+
+#titulo {
+    line-height: 250%;
+}
+
+
+#rodadas {
+    line-height: 135%;
+}
+
+
+#info h1, h2 {
+    color:#f54f4f;
+}
+
+#info h3 {
+    display: inline;
+    font-size: 1.3vw;
+}
+
+#info h1 {
+    font-size: 2.4vw;
+}
+
+#info h2 {
+    font-size: 1.7vw;
+}
+
+#conteudo {
+    position: absolute;
+    left: 9%;
+    top: 15%;
+}
+
+table {
+    width: 400px;
+    height: 150px;
+}

@@ -2,6 +2,18 @@
 
 var n_rodadas;
 
+var n_jogadores;
+
+var jogando = false;
+
+var indice_jogador = 0;
+
+var classificado = 0;
+
+var tipo_jogo;
+
+var jogadores = [];
+
 var preenchimento = 0;
 
 var id_rodada = 0;
@@ -19,6 +31,8 @@ var J2_venceu = false;
 var resultado = "...";
 
 var rodadas = document.getElementById("rodadas");
+
+var class_jog = document.getElementById("class_jog");
 
 var verifica = [
     [0, 1, 2],
@@ -152,16 +166,17 @@ function encerrarRodada(){
 
 // MANIPULAÇÃO DA PARTIDA
 
-function verificarNum(){
+function verificarRodadas(){
     window.campo = document.getElementsByName("inNumRod")[0];
     window.opt = campo.options[campo.selectedIndex];
     window.num = opt.value;
     n_rodadas = num;
 
     if(num == ""){
-        document.getElementById("msg").style.visibility = "visible";
+        document.getElementById("msg").innerHTML = "Por favor, selecione o número de rodadas";
     }
     else{
+        document.getElementById("msg").innerHTML = "";
         document.getElementById("configuracoes").style.visibility = "hidden";
         document.getElementById("partida").style.visibility = "visible";
         iniciarPartida();
@@ -185,17 +200,38 @@ function iniciarPartida(){
     preenchimento = 0;
     criarRodadas();
     definirRodadas();
+    if(tipo_jogo == "torneio"){
+        jogando = true;
+        document.getElementsByClassName("resultado_torneio")[1].innerHTML = "...";
+        document.getElementById("novo_torneio").type = "hidden";
+        document.getElementById("reiniciar_torneio").type = "hidden";
+        classificado = 0;
+        criarJogadores();
+        definirJogadores();
+        gerarJogadores();
+    }   
 }
 
 function verificarStatus(){
+    console.log("entrando");
     for(let i=0; i<8; i++){
         if(document.getElementsByClassName("imagem")[verifica[i][0]].getAttribute("src") == "x5.png" && document.getElementsByClassName("imagem")[verifica[i][1]].getAttribute("src") == "x5.png" && document.getElementsByClassName("imagem")[verifica[i][2]].getAttribute("src") == "x5.png"){
-            document.getElementsByClassName("status_rodada")[id_rodada].innerHTML = "J1 venceu";
+            if(tipo_jogo == "partida"){
+                document.getElementsByClassName("status_rodada")[id_rodada].innerHTML = "J1 venceu";
+            }
+            else if(tipo_jogo == "torneio"){
+                document.getElementsByClassName("status_rodada")[id_rodada].innerHTML = jogadores[jogador1].name+" venceu";
+            }
             J1_venceu = true;
             verificarJogo();
         }
         else if(document.getElementsByClassName("imagem")[verifica[i][0]].getAttribute("src") == "o3.png" && document.getElementsByClassName("imagem")[verifica[i][1]].getAttribute("src") == "o3.png" && document.getElementsByClassName("imagem")[verifica[i][2]].getAttribute("src") == "o3.png"){
-            document.getElementsByClassName("status_rodada")[id_rodada].innerHTML = "J2 venceu";
+            if(tipo_jogo == "partida"){
+                document.getElementsByClassName("status_rodada")[id_rodada].innerHTML = "J2 venceu";
+            }
+            else if(tipo_jogo == "torneio"){
+                document.getElementsByClassName("status_rodada")[id_rodada].innerHTML = jogadores[jogador2].name+" venceu";
+            }
             J2_venceu = true;
             verificarJogo();
         }
@@ -217,9 +253,9 @@ function verificarJogo(){
 }
 
 function encerrarPartida(){
-    document.getElementById("finalizar_partida").type = "button";
     tirarFuncoes();
     preenchimento = 0;
+    document.getElementById("finalizar_partida").type = "button";
 }
 
 function finalizarPartida(){
@@ -239,18 +275,53 @@ function finalizarPartida(){
 function mostrarResultado(){
     if(vitoria_J1 > vitoria_J2){
         document.getElementById("resultado").innerHTML = "J1 venceu";
+        if(tipo_jogo == "torneio"){
+            document.getElementById("resultado").innerHTML = jogadores[jogador1].name+" venceu";
+            jogadores[jogador2].status = "desclassificado";
+        }
     }
     else if(vitoria_J2 > vitoria_J1){
         document.getElementById("resultado").innerHTML = "J2 venceu";
+        if(tipo_jogo == "torneio"){
+            document.getElementById("resultado").innerHTML = jogadores[jogador1].name+" venceu";
+            jogadores[jogador1].status = "desclassificado";
+        }
     }
     else if (vitoria_J1 == vitoria_J2){
         document.getElementById("resultado").innerHTML = "empate";
     }
-    document.getElementById("nova_partida").type = "button";
-    document.getElementById("jogar_novamente").type = "button";
+
+    if(tipo_jogo == "partida"){
+        document.getElementById("nova_partida").type = "button";
+        document.getElementById("jogar_novamente").type = "button";
+    }
+    else if(tipo_jogo == "torneio"){
+        verificarTorneio();
+    }
+}
+
+function verificarTorneio(){
+    classificado = 0;
+    for(let x = 0; x < n_jogadores; x++){
+        if(jogadores[x].status == "classificado"){
+            classificado++;
+            indice_jogador = x;
+        }
+    }
+    if(classificado == 1){
+        document.getElementsByClassName("resultado_torneio")[1].innerHTML = jogadores[indice_jogador].name+" venceu";
+        document.getElementById("novo_torneio").type = "button";
+        document.getElementById("reiniciar_torneio").type = "button";
+    }
+    else{
+        console.log(jogadores.length);
+        console.log(classificado);
+        document.getElementById("proxima_partida").type = "button";
+    }
 }
 
 function novaPartida(){
+    jogando = false;
     removerRodadas();
     document.getElementById("configuracoes").style.visibility = "visible";
     document.getElementById("partida").style.visibility = "hidden";
@@ -271,13 +342,152 @@ function jogarNovamente(){
     contador = 0;
     preenchimento = 0;
     definirRodadas();
+    if(tipo_jogo == "torneio"){
+        document.getElementById("proxima_partida").type = "hidden";
+        definirJogadores();
+    }
 }
 
 // MANIPULAÇÃO DO JOGO
 
 var principal = function(){
+    atualizar();
+    verificarTipo();
     verificarStatus();
     window.requestAnimationFrame(principal);
 }
 
 principal();
+
+// MANIPULAÇÃO DO TORNEIO
+
+function atualizar(){
+    if(jogando == true){
+        for(let x = 0; x < n_jogadores; x++){
+            document.getElementsByClassName("status_jogador")[x].innerHTML = jogadores[x].status;
+        }
+    }
+}
+
+function criarJogadores(){
+    for(let x = 1; x <= n_jogadores; x++){
+        let jogador = {
+            "name": "Jogador"+x,
+            "status": "classificado"
+        } 
+        jogadores.push(jogador);
+    }
+    console.log(jogadores[0].name);
+}
+
+function verificarConfig(){
+    window.campo = document.getElementsByName("inNumJog")[0];
+    window.opt = campo.options[campo.selectedIndex];
+    window.num = opt.value;
+
+    window.campo2 = document.getElementsByName("inNumRod")[0];
+    window.opt2 = campo2.options[campo2.selectedIndex];
+    window.num2 = opt2.value;
+
+    if(num == "" && num2 != ""){
+        document.getElementById("msg").innerHTML = "Por favor, selecione o número de jogadores";
+    }
+    else if(num2 == "" && num != ""){
+        document.getElementById("msg").innerHTML = "Por favor, selecione o número de rodadas";
+    }
+    else if(num == "" && num2 == ""){
+        document.getElementById("msg").innerHTML = "Por favor, selecione o número de jogadores e rodadas";
+    }
+    else{
+        document.getElementById("msg").innerHTML = "";
+        n_jogadores = num;
+        n_rodadas = num2;
+        document.getElementById("configuracoes").style.visibility = "hidden";
+        document.getElementById("partida").style.visibility = "visible";
+        iniciarPartida();
+    }
+}
+
+function verificarTipo(){
+    if(document.URL.includes("partida.html")){
+        tipo_jogo = "partida";
+    }
+    else if(document.URL.includes("torneio.html")){
+        tipo_jogo = "torneio";
+    }
+}
+
+function definirJogadores(){
+    jogador1 = (Math.floor(Math.random() * (n_jogadores - 1 + 1)) + 1) - 1;
+    jogador2 = (Math.floor(Math.random() * (n_jogadores - 1 + 1)) + 1) - 1;
+    if(jogadores[jogador1].status == "classificado" && jogadores[jogador2].status == "classificado" && jogador1 != jogador2){
+        document.getElementById("jogadores").innerHTML = jogadores[jogador1].name+" x "+jogadores[jogador2].name;
+    }
+    else{
+        definirJogadores();
+    }
+}
+
+function gerarJogadores(){
+    for(i = 0; i < n_jogadores; i++){
+        let h3 = document.createElement("h3");
+        h3.classList.add("nome_jogador");
+        h3.innerHTML = jogadores[i].name+": ";
+        class_jog.appendChild(h3);
+
+        let outroh3 = document.createElement("h3");
+        outroh3.classList.add("status_jogador");
+        outroh3.innerHTML = jogadores[i].status;
+        class_jog.appendChild(outroh3);
+
+        let br = document.createElement("br");
+        br.classList.add("espaco2");
+        class_jog.appendChild(br);
+    }
+}
+
+function novoTorneio(){
+
+}
+
+function reiniciarTorneio(){
+    document.getElementById("novo_torneio").type = "hidden";
+    document.getElementById("reiniciar_torneio").type = "hidden";
+    reiniciarImagens();
+    adicionarFuncoes();
+    resultado = "...";
+    vitoria_J1 = 0;
+    vitoria_J2 = 0;
+    id_rodada = 0;
+    cont_rodada = 1;
+    J1_venceu = false;
+    J2_venceu = false;
+    contador = 0;
+    preenchimento = 0;
+    definirRodadas();
+    reiniciarJogadores();
+    document.getElementsByClassName("resultado_torneio")[1].innerHTML = "...";
+}
+
+function reiniciarJogadores(){
+    for(let x=0; x < n_jogadores; x++){
+        jogadores[x].status = "classificado";
+    }
+}
+
+function novoTorneio(){
+    jogando = false;
+    removerRodadas();
+    removerJogadores();
+    document.getElementById("configuracoes").style.visibility = "visible";
+    document.getElementById("partida").style.visibility = "hidden";
+}
+
+function removerJogadores(){
+    for(let x=1; x <= n_jogadores; x++){
+        document.getElementsByClassName("nome_jogador")[0].remove();
+        document.getElementsByClassName("status_jogador")[0].remove();
+        document.getElementsByClassName("espaco2")[0].remove();
+   }
+   jogadores = [];
+}

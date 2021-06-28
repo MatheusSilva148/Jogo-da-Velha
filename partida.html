@@ -11,13 +11,14 @@
 
         <div id="logoarea">
             <img id="logo" src="logo.JPG">
+            <input type="button" id="voltar" class="botoes" value="VOLTAR" onclick="location.href='index.html'">
         </div>
         <div id="corpo2">
             <img id="backg" src="explore.jpg">
             <div id="configuracoes">
                 <div id="intracorpo3">
-                    <div id="conteudo">
-                            <table>
+                    <div id="conteudo_partida">
+                            <table id="config_partida">
                                 <tr>
                                     <th colspan="2">
                                         Configurações da Partida
@@ -38,11 +39,11 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" id="botao">
-                                        <input type="button" name="confirmar" class="botoes" id="confirmar" value="CONFIRMAR" onclick="verificarNum()">
+                                        <input type="button" name="confirmar" class="botoes" id="confirmar" value="CONFIRMAR" onclick="verificarRodadas()">
                                     </td>
                                 </tr>
                             </table>
-                        <p id="msg">Por favor, selecione o número de rodadas</p>
+                        <p id="msg"></p>
                     </div>
                 </div>
             </div>
@@ -58,10 +59,10 @@
                     </div>
 
                     <h3>Resultado: </h3><h3 id="resultado"></h3>
-                    <input type="hidden" name="enviar" id="proxima_rodada" class="botoes" value="PRÓXIMA RODADA" onclick="iniciarRodada()">
-                    <input type="hidden" name="enviar" id="finalizar_partida" class="botoes" value="FINALIZAR PARTIDA" onclick="finalizarPartida()">
-                    <input type="hidden" name="enviar" id="jogar_novamente" class="botoes" value="JOGAR NOVAMENTE" onclick="jogarNovamente()">
-                    <input type="hidden" name="enviar" id="nova_partida" class="botoes" value="NOVA PARTIDA" onclick="novaPartida()">
+                    <input type="hidden"  id="proxima_rodada" class="botoes" value="PRÓXIMA RODADA" onclick="iniciarRodada()">
+                    <input type="hidden"  id="finalizar_partida" class="botoes" value="FINALIZAR PARTIDA" onclick="finalizarPartida()">
+                    <input type="hidden"  id="jogar_novamente" class="botoes" value="JOGAR NOVAMENTE" onclick="jogarNovamente()">
+                    <input type="hidden"  id="nova_partida" class="botoes" value="NOVA PARTIDA" onclick="novaPartida()">
                 </div>
                 <div id="intracorpo">
                             <div class="janela">

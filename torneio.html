@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Jogo da Velha | Torneio</title>
+        <link href="estilo_novo.css" rel="stylesheet">
+    </head>
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
+        <div id="logoarea">
+            <img id="logo" src="logo.JPG">
+            <input type="button" id="voltar" class="botoes" value="VOLTAR" onclick="location.href='index.html'">
+        </div>
+        <div id="corpo2">
+            <img id="backg" src="explore.jpg">
+            <div id="configuracoes">
+                <div id="intracorpo4">
+                    <div id="conteudo_torneio">
+                            <table id="config_torneio">
+                                <tr>
+                                    <th colspan="2">
+                                        Configurações do Torneio
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Número de jogadores:
+                                    </td>
+                                    <td>
+                                        <select name="inNumJog">
+                                            <option value="" selected>Selecione o Nº de jogadores</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <td>
+                                    Número de Rodadas:
+                                </td>
+                                <td>
+                                    <select name="inNumRod">
+                                        <option value="" selected>Selecione o Nº de rodadas</option>
+                                        <option value="1">1</option>
+                                        <option value="3">3</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td colspan="2" id="botao">
+                                        <input type="button" name="confirmar" class="botoes" id="confirmar" value="CONFIRMAR" onclick="verificarConfig()">
+                                    </td>
+                                </tr>
+                            </table>
+                        <p id="msg"></p>
+                    </div>
+                </div>
+            </div>
+            <div id="partida">
+                <div id="info">
+                    <div id="titulo">
+                        <h1>Torneio</h1>
+                        <h3 id="jogadores"></h3>
+                    </div>
+                    <h2>Status do Partida</h2>
+
+                    <div id="rodadas">
+                    </div>
+
+                    <h3>Resultado: </h3><h3 id="resultado"></h3>
+                    <input type="hidden" id="proxima_rodada" class="botoes" value="PRÓXIMA RODADA" onclick="iniciarRodada()">
+                    <input type="hidden" id="proxima_partida" class="botoes" value="PRÓXIMA PARTIDA" onclick="jogarNovamente()">
+                    <input type="hidden"  id="finalizar_partida" class="botoes" value="FINALIZAR PARTIDA" onclick="finalizarPartida()">
+                    <input type="hidden"  id="jogar_novamente" class="botoes" value="JOGAR NOVAMENTE" onclick="jogarNovamente()">
+                    <input type="hidden"  id="nova_partida" class="botoes" value="NOVA PARTIDA" onclick="novaPartida()">
+ 
+                </div>
+                <div id="intracorpo">
+                            <div class="janela">
+                            </div>
+                </div>
+                <div id="classificacao">
+                    <div id="jogadores">
+                        <h2>Jogadores</h2>
+                        <div id="class_jog">
+                        </div>
+                    </div>
+                    <h2>Status do Torneio</h2>
+                    <div id="status_jogo">
+                        <h3 class="resultado_torneio">Resultado: </h3><h3 class="resultado_torneio">...</h3>
+                        <input type="hidden"  id="reiniciar_torneio" class="botoes" value="REINICIAR TORNEIO" onclick="reiniciarTorneio()">
+                        <input type="hidden"  id="novo_torneio" class="botoes" value="NOVO TORNEIO" onclick="novoTorneio()">
+                    </div>
+                </div>
+        </div>
+        </div>
+        <div id="rodape3">
+            <p>Copyright by Webmaster - matheussimoesdasilva@protonmail.com</p>
+            <div id="grupoicone">
+                <a href="https://gab.com/MatheusSilva148"><img class="icones" src="gab.png"></a>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $("#celular").mask("(00) 00000-0000");
+        </script>
+        <script src="main.js"></script>
+    </body>
+</html>

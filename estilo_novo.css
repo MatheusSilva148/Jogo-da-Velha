@@ -1,6 +1,5 @@
 #msg {
     text-align: center;
-    visibility: hidden;
     font-size: 1vm;
 }
 
@@ -73,6 +72,30 @@
     border-radius: 5%;
 }
 
+#inicio {
+    position: absolute;
+    background-color: #fbfaf8;
+    width: 35%;
+    height: 42%;
+    top: 30%;
+    left: 33%; 
+    font-family: Futura Lt Bt;
+    color: #665f55;
+    border-radius: 5%;
+}
+
+#intracorpo4 {
+    position: absolute;
+    background-color: #fbfaf8;
+    width: 35%;
+    height: 48%;
+    top: 30%;
+    left: 33%; 
+    font-family: Futura Lt Bt;
+    color: #665f55;
+    border-radius: 5%;
+}
+
 
 #partida {
     visibility: hidden;
@@ -103,6 +126,14 @@
     height: 10%;
 }
 
+#proxima_partida {
+    position: absolute;
+    left: 21%;
+    top: 81%;
+    width: 55%;
+    height: 10%;
+}
+
 #confirmar {
     width: 30%;
     height: 80%;
@@ -116,6 +147,40 @@
     height: 10%;
 }
 
+#partida_unica {
+    position: absolute;
+    left: 15%;
+    top: 100%;
+    width: 30%;
+    height: 40%;
+}
+
+#torneio {
+    position: absolute;
+    right: 16%;
+    top: 100%;
+    width: 30%;
+    height: 40%;
+}
+
+#voltar {
+    position: absolute;
+    right: 2%;
+    top: 30%;
+    width: 8%;
+    height: 40%;
+    background-color: #f54f4f;
+    border: 1px solid white;
+    color: white;
+    font-weight: bold;
+}
+
+#voltar:hover {
+    background-color: white;
+    border: 1px solid #f54f4f;
+    color: #f54f4f;
+}
+
 #jogar_novamente {
     position: absolute;
     left: 45%;
@@ -125,7 +190,25 @@
     font-size: 70%;
 }
 
+#reiniciar_torneio {
+    position: absolute;
+    left: 45%;
+    top: 81%;
+    width: 50%;
+    height: 10%;
+    font-size: 70%;
+}
+
 #nova_partida {
+    position: absolute;
+    left: 5%;
+    top: 81%;
+    width: 35%;
+    height: 10%;
+    font-size: 70%;
+}
+
+#novo_torneio {
     position: absolute;
     left: 5%;
     top: 81%;
@@ -249,6 +332,33 @@ img {
     line-height: 320%;
 }
 
+#classificacao {
+    position: absolute;
+    height: 80%;
+    width: 20%;
+    background-color: #fbfaf8;
+    right: 5%;
+    top: 10%;
+    border-radius: 5%;
+    padding-top: 1.5%;
+    padding-left: 1.5%;
+    line-height: 400%;
+}
+
+#jogadores{
+    line-height: 300%;
+}
+#class_jog{
+    line-height: 320%;
+}
+
+#status_jogo{
+    line-height: 50%;
+}
+
+#classificacao h3{
+    display: inline;
+}
 
 #titulo {
     line-height: 250%;
@@ -259,6 +369,13 @@ img {
     line-height: 135%;
 }
 
+#class_jog {
+    line-height: 135%;
+}
+
+#class_jog {
+    line-height: 135%;
+}
 
 #info h1, h2 {
     color:#f54f4f;
@@ -269,21 +386,56 @@ img {
     font-size: 1.3vw;
 }
 
+#conteudo_inicio h3{
+    font-size: 1.3vw;
+}
+
 #info h1 {
     font-size: 2.4vw;
 }
 
-#info h2 {
+#info h2, #classificacao h2, #conteudo_inicio h2 {
     font-size: 1.7vw;
 }
 
-#conteudo {
-    position: absolute;
-    left: 9%;
-    top: 15%;
+.nome_jogador{
+    font-size: 1.3vw;
 }
 
-table {
+.status_jogador{
+    font-size: 1.3vw;
+}
+
+.resultado_torneio{
+    font-size: 1.3vw;
+}
+
+#conteudo_torneio {
+    position: absolute;
+    left: 9%;
+    top: 5%;
+}
+
+#conteudo_partida {
+    position: absolute;
+    left: 9%;
+    top: 10%;
+}
+
+#conteudo_inicio {
+    position: absolute;
+    left: 15%;
+    top: 18%;
+    text-align: center;
+    line-height: 300%;
+} 
+
+#config_partida {
     width: 400px;
     height: 150px;
+}
+
+#config_torneio {
+    width: 400px;
+    height: 200px;
 }

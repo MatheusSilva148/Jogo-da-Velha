@@ -138,6 +138,48 @@ function removerRodadas(){
     }
  }
 
+ function gerarJogadores(){
+    for(i = 0; i < n_jogadores; i++){
+        let h3 = document.createElement("h3");
+        h3.classList.add("nome_jogador");
+        h3.innerHTML = jogadores[i].name+": ";
+        class_jog.appendChild(h3);
+
+        let outroh3 = document.createElement("h3");
+        outroh3.classList.add("status_jogador");
+        outroh3.innerHTML = jogadores[i].status;
+        class_jog.appendChild(outroh3);
+
+        let br = document.createElement("br");
+        br.classList.add("espaco2");
+        class_jog.appendChild(br);
+    }
+}
+
+function atualizar(){
+    if(jogando == true){
+        for(let x = 0; x < n_jogadores; x++){
+            document.getElementsByClassName("status_jogador")[x].innerHTML = jogadores[x].status;
+        }
+    }
+}
+
+function removerJogadores(){
+    for(let x=1; x <= n_jogadores; x++){
+        document.getElementsByClassName("nome_jogador")[0].remove();
+        document.getElementsByClassName("status_jogador")[0].remove();
+        document.getElementsByClassName("espaco2")[0].remove();
+   }
+   jogadores = [];
+}
+
+function reiniciarJogadores(){
+    for(let x=0; x < n_jogadores; x++){
+        jogadores[x].status = "classificado";
+    }
+    definirJogadores();
+}
+
 // MANIPULAÇÃO DAS RODADAS
 
 function iniciarRodada(){
@@ -213,7 +255,6 @@ function iniciarPartida(){
 }
 
 function verificarStatus(){
-    console.log("entrando");
     for(let i=0; i<8; i++){
         if(document.getElementsByClassName("imagem")[verifica[i][0]].getAttribute("src") == "x5.png" && document.getElementsByClassName("imagem")[verifica[i][1]].getAttribute("src") == "x5.png" && document.getElementsByClassName("imagem")[verifica[i][2]].getAttribute("src") == "x5.png"){
             if(tipo_jogo == "partida"){
@@ -283,7 +324,7 @@ function mostrarResultado(){
     else if(vitoria_J2 > vitoria_J1){
         document.getElementById("resultado").innerHTML = "J2 venceu";
         if(tipo_jogo == "torneio"){
-            document.getElementById("resultado").innerHTML = jogadores[jogador1].name+" venceu";
+            document.getElementById("resultado").innerHTML = jogadores[jogador2].name+" venceu";
             jogadores[jogador1].status = "desclassificado";
         }
     }
@@ -297,26 +338,6 @@ function mostrarResultado(){
     }
     else if(tipo_jogo == "torneio"){
         verificarTorneio();
-    }
-}
-
-function verificarTorneio(){
-    classificado = 0;
-    for(let x = 0; x < n_jogadores; x++){
-        if(jogadores[x].status == "classificado"){
-            classificado++;
-            indice_jogador = x;
-        }
-    }
-    if(classificado == 1){
-        document.getElementsByClassName("resultado_torneio")[1].innerHTML = jogadores[indice_jogador].name+" venceu";
-        document.getElementById("novo_torneio").type = "button";
-        document.getElementById("reiniciar_torneio").type = "button";
-    }
-    else{
-        console.log(jogadores.length);
-        console.log(classificado);
-        document.getElementById("proxima_partida").type = "button";
     }
 }
 
@@ -348,37 +369,7 @@ function jogarNovamente(){
     }
 }
 
-// MANIPULAÇÃO DO JOGO
-
-var principal = function(){
-    atualizar();
-    verificarTipo();
-    verificarStatus();
-    window.requestAnimationFrame(principal);
-}
-
-principal();
-
 // MANIPULAÇÃO DO TORNEIO
-
-function atualizar(){
-    if(jogando == true){
-        for(let x = 0; x < n_jogadores; x++){
-            document.getElementsByClassName("status_jogador")[x].innerHTML = jogadores[x].status;
-        }
-    }
-}
-
-function criarJogadores(){
-    for(let x = 1; x <= n_jogadores; x++){
-        let jogador = {
-            "name": "Jogador"+x,
-            "status": "classificado"
-        } 
-        jogadores.push(jogador);
-    }
-    console.log(jogadores[0].name);
-}
 
 function verificarConfig(){
     window.campo = document.getElementsByName("inNumJog")[0];
@@ -408,12 +399,13 @@ function verificarConfig(){
     }
 }
 
-function verificarTipo(){
-    if(document.URL.includes("partida.html")){
-        tipo_jogo = "partida";
-    }
-    else if(document.URL.includes("torneio.html")){
-        tipo_jogo = "torneio";
+function criarJogadores(){
+    for(let x = 1; x <= n_jogadores; x++){
+        let jogador = {
+            "name": "Jogador"+x,
+            "status": "classificado"
+        } 
+        jogadores.push(jogador);
     }
 }
 
@@ -428,26 +420,22 @@ function definirJogadores(){
     }
 }
 
-function gerarJogadores(){
-    for(i = 0; i < n_jogadores; i++){
-        let h3 = document.createElement("h3");
-        h3.classList.add("nome_jogador");
-        h3.innerHTML = jogadores[i].name+": ";
-        class_jog.appendChild(h3);
-
-        let outroh3 = document.createElement("h3");
-        outroh3.classList.add("status_jogador");
-        outroh3.innerHTML = jogadores[i].status;
-        class_jog.appendChild(outroh3);
-
-        let br = document.createElement("br");
-        br.classList.add("espaco2");
-        class_jog.appendChild(br);
+function verificarTorneio(){
+    classificado = 0;
+    for(let x = 0; x < n_jogadores; x++){
+        if(jogadores[x].status == "classificado"){
+            classificado++;
+            indice_jogador = x;
+        }
     }
-}
-
-function novoTorneio(){
-
+    if(classificado == 1){
+        document.getElementsByClassName("resultado_torneio")[1].innerHTML = jogadores[indice_jogador].name+" venceu";
+        document.getElementById("novo_torneio").type = "button";
+        document.getElementById("reiniciar_torneio").type = "button";
+    }
+    else{
+        document.getElementById("proxima_partida").type = "button";
+    }
 }
 
 function reiniciarTorneio(){
@@ -469,12 +457,6 @@ function reiniciarTorneio(){
     document.getElementsByClassName("resultado_torneio")[1].innerHTML = "...";
 }
 
-function reiniciarJogadores(){
-    for(let x=0; x < n_jogadores; x++){
-        jogadores[x].status = "classificado";
-    }
-}
-
 function novoTorneio(){
     jogando = false;
     removerRodadas();
@@ -483,11 +465,22 @@ function novoTorneio(){
     document.getElementById("partida").style.visibility = "hidden";
 }
 
-function removerJogadores(){
-    for(let x=1; x <= n_jogadores; x++){
-        document.getElementsByClassName("nome_jogador")[0].remove();
-        document.getElementsByClassName("status_jogador")[0].remove();
-        document.getElementsByClassName("espaco2")[0].remove();
-   }
-   jogadores = [];
+// MANIPULAÇÃO DO JOGO
+
+function verificarTipo(){
+    if(document.URL.includes("partida.html")){
+        tipo_jogo = "partida";
+    }
+    else if(document.URL.includes("torneio.html")){
+        tipo_jogo = "torneio";
+    }
 }
+
+var principal = function(){
+    atualizar();
+    verificarTipo();
+    verificarStatus();
+    window.requestAnimationFrame(principal);
+}
+
+principal();

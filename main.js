@@ -225,10 +225,7 @@ function verificarRodadas(){
     }
 }
 
-function iniciarPartida(){
-    document.getElementById("nova_partida").type = "hidden";
-    document.getElementById("jogar_novamente").type = "hidden";
-    document.getElementById("finalizar_partida").type = "hidden";
+function ativarPartida(){
     reiniciarImagens();
     adicionarFuncoes();
     resultado = "...";
@@ -240,6 +237,13 @@ function iniciarPartida(){
     J2_venceu = false;
     contador = 0;
     preenchimento = 0;
+}
+
+function iniciarPartida(){
+    document.getElementById("nova_partida").type = "hidden";
+    document.getElementById("jogar_novamente").type = "hidden";
+    document.getElementById("finalizar_partida").type = "hidden";
+    ativarPartida();
     criarRodadas();
     definirRodadas();
     if(tipo_jogo == "torneio"){
@@ -351,17 +355,7 @@ function novaPartida(){
 function jogarNovamente(){
     document.getElementById("jogar_novamente").type = "hidden";
     document.getElementById("nova_partida").type = "hidden";
-    reiniciarImagens();
-    adicionarFuncoes();
-    resultado = "...";
-    vitoria_J1 = 0;
-    vitoria_J2 = 0;
-    id_rodada = 0;
-    cont_rodada = 1;
-    J1_venceu = false;
-    J2_venceu = false;
-    contador = 0;
-    preenchimento = 0;
+    ativarPartida();
     definirRodadas();
     if(tipo_jogo == "torneio"){
         document.getElementById("proxima_partida").type = "hidden";
@@ -441,17 +435,7 @@ function verificarTorneio(){
 function reiniciarTorneio(){
     document.getElementById("novo_torneio").type = "hidden";
     document.getElementById("reiniciar_torneio").type = "hidden";
-    reiniciarImagens();
-    adicionarFuncoes();
-    resultado = "...";
-    vitoria_J1 = 0;
-    vitoria_J2 = 0;
-    id_rodada = 0;
-    cont_rodada = 1;
-    J1_venceu = false;
-    J2_venceu = false;
-    contador = 0;
-    preenchimento = 0;
+    ativarPartida();
     definirRodadas();
     reiniciarJogadores();
     document.getElementsByClassName("resultado_torneio")[1].innerHTML = "...";
